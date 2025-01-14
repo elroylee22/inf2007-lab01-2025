@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     Lab01Theme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            var username by remember { mutableStateOf("") }
+            var name by remember { mutableStateOf("") }
             var showGreeting by remember { mutableStateOf(false) }
 
             Column(
@@ -55,25 +55,26 @@ fun MainScreen() {
 
                 Button(
                     onClick = {
-                        if (username.isNotBlank()) {
-                            showGreeting = false
+                        if (name.isNotBlank()) {
+                            showGreeting = true;
+                        } else {
+                            showGreeting = false;
                         }
                     },
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("submitButton")
                 ) {
-                    Text("Submit")
+                    Text("Submit");
                 }
 
                 if (showGreeting) {
-                    Greeeting(
-                        name = username,
+                    Greeting(
+                        name = name,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 16.dp)
-                    )
-
+                    );
                 }
             }
         }
@@ -88,22 +89,22 @@ fun UserInput(name: String, onNameChange: (String) -> Unit, modifier: Modifier =
         label = { Text("Enter your Name") },
         modifier = modifier
             .fillMaxWidth()
-            .testTag("UserInput")
-    )
+            .testTag("nameInput")
+    );
 }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $username!, Welcome to InF2007!",
-        modifier = Modifier
+        text = "Hello $name!, Welcome to INF2007!",
+        modifier = modifier
             .fillMaxWidth()
-            .testTag("greeting")
-    )
+            .testTag("greetingMsg")
+    );
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MainScreen()
+    MainScreen();
 }
